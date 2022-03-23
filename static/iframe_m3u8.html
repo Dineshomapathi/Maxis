@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Iframe m3u8</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://vjs.zencdn.net/5.19.2/video-js.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body style="margin: 0; padding: 0">
+	<div class="bg-box">
+		 <video id="video" class="embed-responsive-item video-js vjs-default-skin vjs-big-play-centered h-100 w-100" autoplay controls></video>
+	</div>
+
+    <script src="https://vjs.zencdn.net/5.19.2/video.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/0.9.1/hls.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/videojs-hlsjs-plugin@0.3.1/videojs-hlsjs-plugin.js"></script>
+	<script src="https://sahilkashyap64.github.io/hls/js/vjs-quality-picker.js?v=v0.0.2"></script>
+	<script>
+		var urlString = window.location.href;
+		var urlParams = new URL(urlString).searchParams;
+		var iframeUrl = urlParams.get("url");
+		// var iframeUrl = window.location.href.split('?url=')[1];
+
+		console.log({iframeUrl});
+		$('#my_iframe').attr('src', iframeUrl);
+		       
+        var player = videojs('video');
+		player.qualityPickerPlugin();
+       	player.src({
+       		src: iframeUrl,
+       		type: 'application/x-mpegURL'
+        });
+
+		player.play();
+	</script>
+</body>
+
+<style>
+	.bg-box{
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: -1;
+	}
+</style>
+</html>
